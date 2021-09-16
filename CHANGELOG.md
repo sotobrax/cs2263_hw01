@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [1.0.0] - 2017-06-20
+## [v1.0.0] - 2021-09-15
+### Added
+- Apache Commons CLI implementation
+- Option to bring up usage menu with "-h" or "--help"
+- "-b" or "--batch" option for input files
+` "-o" or "--output" option for output files
 
 [Unreleased]: 
