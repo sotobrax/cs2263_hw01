@@ -7,22 +7,26 @@ package edu.isu.cs2263.hw01;
 import org.apache.commons.cli.*;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 
 public class App {
 
     public static void main(String[] args) {
-        File file = new File("");
+
+
     Options options = new Options();
     CommandLineParser parser = new DefaultParser();
     Option batch = Option.builder ("b").longOpt("batch")
             .argName("file")
-            .hasArg(true)
-            .required(false)
+            .hasArg(false)
+            .required(true)
             .desc("batch file containing expressions to evaluate").build();
     Option output = Option.builder ("o").longOpt("output")
             .argName("file")
-            .hasArg(true)
-            .required(false)
+            .hasArg(false)
+            .required(true)
             .desc("output file").build();
 
 
@@ -31,6 +35,7 @@ public class App {
         options.addOption("h", "help", false, "print help message");
         options.addOption(output);
         options.addOption(batch);
+
 
         try {
             CommandLine cmd = parser.parse( options, args);
@@ -42,17 +47,21 @@ public class App {
                 formatter.printHelp("Options", options);
                 System.exit(0);
             }
-            if (cmd.hasOption("b")){
+            else if (cmd.hasOption("b")){
                 System.out.println("Batch File: "+ cmd.getOptionValue("b"));
+                BatchEval.beval(cmd.getOptionValue("b"));
 
             }
-            if (cmd.hasOption("o")){
+            else if (cmd.hasOption("o")){
                 System.out.println("Output File: " + cmd.getOptionValue("b"));
             }
 
 
-        } catch (ParseException e) {
-            e.printStackTrace();
+        } catch (ParseException | FileNotFoundException e) {
+           //e.printStackTrace();
+            Eval.eval();
+
+
         }
 
     }
